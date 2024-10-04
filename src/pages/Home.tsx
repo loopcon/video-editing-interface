@@ -1,23 +1,13 @@
-import { startTransition, useState } from 'react';
 import OwlCarousel from 'react-owl-carousel';
-import { useDispatch } from 'react-redux';
-// import { registerRoot } from "remotion";
-// import { RemotionRoot } from "../Root";
-// import { useNavigate } from 'react-router-dom';
-import { uploadVideo } from '../redux/actions/uploadedVideo';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 const Home: React.FC = () => {
-    const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-    // const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const options = {
-        // loop: true,
         center: true,
-        // items: 3,
         margin: 0,
-        // autoplay: true,
         dots: false,
         autoplayTimeout: 8500,
         smartSpeed: 450,
@@ -35,33 +25,9 @@ const Home: React.FC = () => {
         }
     };
 
-    // On file select (from the pop up)
-    const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // const file = event.target.files![0];
-        // if (!file) return;
-
-        // console.log("file >>>", file.name);
-        // if (file) {
-        //     let obj = {
-        //         name: file.name,
-        //         size: file.size,
-        //         type: file.type,
-        //         lastModified: file.lastModified,
-        //     }
-
-        //     // registerRoot(RemotionRoot);
-        //     startTransition(() => {
-        //         setUploadedFile(file);
-        //         localStorage.setItem('File', JSON.stringify(obj));
-        //         // dispatch(uploadVideo(obj));
-        //         // navigate('/remotion-canvas', { state: { uploadedFile: file } });
-        //     });
-        // }
-    };
-
-
     return (
         <>
+            <Header />
             <section className="hero">
                 <OwlCarousel className="hero__slider owl-carousel" {...options}>
                     <div className="hero__item set-bg">
@@ -71,45 +37,14 @@ const Home: React.FC = () => {
                                     <div className="hero__text">
                                         <span>For website and video editing</span>
                                         <h2>Videographer’s Portfolio</h2>
-                                        {/* <label className="primary-btn" htmlFor="file-input">
-                                            Get Start
-                                        </label> */}
                                         <Link className="primary-btn" to={'create'}>
                                             Get Start
                                         </Link>
-                                        {/* accept='video/mp4,audio/' */}
-                                        {/* <input type="file" id="file-input" hidden onChange={onFileChange} /> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {/* <div className="hero__item set-bg">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <div className="hero__text">
-                                        <span>For website and video editing</span>
-                                        <h2>Videographer’s Portfolio</h2>
-                                        <a href="#" className="primary-btn">See more about us</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="hero__item set-bg">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <div className="hero__text">
-                                        <span>For website and video editing</span>
-                                        <h2>Videographer’s Portfolio</h2>
-                                        <a href="#" className="primary-btn">See more about us</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
                 </OwlCarousel>
             </section>
 
@@ -174,6 +109,8 @@ const Home: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            <Footer />
         </>
     )
 }
