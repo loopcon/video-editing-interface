@@ -27,6 +27,6 @@ This project is a responsive video editing interface that allows users to load a
 # Getting Started
 
 Running the Code Locally
-Clone the repository: git clone https://github.com/your-username/your-repo-name.git
+Clone the repository: git clone https://github.com/loopcon/video-editing-interface.git
 Install dependencies: npm install 
 Start the development server: npm run dev
