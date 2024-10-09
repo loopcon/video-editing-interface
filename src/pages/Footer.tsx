@@ -1,3 +1,5 @@
+import { BiNavigation } from "react-icons/bi";
+
 const Footer = () => {
     return (
         <footer className="footer">
@@ -60,7 +62,9 @@ const Footer = () => {
                                 <p>Videoprah is an award-winning, full-service production company specializing.</p>
                                 <form action="#">
                                     <input type="text" placeholder="Email" />
-                                        <button type="submit"><i className="fa fa-send"></i></button>
+                                    <button type="submit">
+                                        <BiNavigation />
+                                    </button>
                                 </form>
                             </div>
                         </div>

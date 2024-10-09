@@ -1,44 +1,22 @@
-export const uploadVideo = async (video: string, dispatch: (action: any) => void) => {
+export const uploadVideo = async (formData: any, dispatch: (action: any) => void) => {
     try {
-        if (!video) {
-            throw new Error('please provide video url');
+        dispatch({ type: "UPLOAD_REQUEST", loading: true });
+
+        const response = await fetch(import.meta.env.VITE_REACT_APP_CLOUDINARY_API_URL, {
+            method: "POST",
+            body: formData,
+        });
+
+        // Check if the response was successful
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        dispatch({ type: 'UPLOAD_VIDEO', payload: video });
-        return video;
+
+        const data = await response.json(); // Wait for the response body to be parsed
+        dispatch({ type: 'UPLOAD_SUCCESS', payload: data.secure_url });
+
+        localStorage.setItem("videoUrl", data.secure_url);
     } catch (error: any) {
-        return error
+        dispatch({ type: "UPLOAD_FAIL", payload: error });
     }
 };
-
-// export const uploadVideo = async (formData: any, dispatch: (action: any) => void) => {
-//     try {
-//         console.log("formData >>", formData);
-
-//         dispatch({ type: "UPLOAD_REQUEST", loading: true });
-
-//         // const response = await fetch(import.meta.env.VITE_REACT_APP_CLOUDINARY_API_URL, {
-//         //     method: "POST",
-//         //     body: formData,
-//         // })
-
-//         // let response: any = '';
-//         const data = await fetch(import.meta.env.VITE_REACT_APP_CLOUDINARY_API_URL, {
-//             method: "POST",
-//             body: formData,
-//         });
-//         console.log('data >>', data)
-
-//         //     .then((response) => response.json())
-//         //     .then((data) => {
-//         //         console.log("data >>", data);
-//         //         response = data;
-//         //     });
-//         // console.log("response >>>", response);
-
-//         // dispatch({ type: "UPLOAD_SUCCESS", payload: response, loading: false });
-
-//         // return response;
-//     } catch (error: any) {
-//         dispatch({ type: "UPLOAD_FAIL", payload: error });
-//     }
-// };

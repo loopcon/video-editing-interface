@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Editor from './pages/editor/Index';
+import * as $ from "jquery" // ---> this line
 
 const App: React.FC = () => {
 

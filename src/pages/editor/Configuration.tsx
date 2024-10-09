@@ -1,33 +1,22 @@
 import { useState } from 'react';
 import './style.css';
 import { FiVideo } from "react-icons/fi";
-// import { FiMusic } from "react-icons/fi";
 import { uploadVideo } from '../../redux/actions/uploadedVideo';
 import { useDispatch } from 'react-redux';
-
-type VideoState =
-    | {
-        type: "empty";
-    }
-    | {
-        type: "blob" | "cloud";
-        url: string;
-    };
+import { updateVideoConfig } from '../../redux/actions/videoConfigActions';
+import MultiRangeSlider from '../component/MultiRangeSlider';
 
 const Configuration: React.FC = () => {
 
-    const [videoState, setVideoState] = useState<VideoState>({
-        type: "empty",
-    });
-
     const [formFields, setFormFields] = useState<any>({
-        width: 0,
-        height: 0,
-        length: 0,
-        title_text: "",
-        subtitle_text: ""
+        width: 400,
+        height: 500,
+        length: 310,
+        title_text: '',
+        subtitle_text: '',
     });
     const dispatch = useDispatch();
+
 
     const uploadVideos = (files: any) => {
         const formData = new FormData();
@@ -36,21 +25,21 @@ const Configuration: React.FC = () => {
         formData.append("upload_preset", "VideoPlayer");
         formData.append("cloud_name", "dzfyemjdk");
 
-        // uploadVideo(formData, dispatch);
-        fetch(import.meta.env.VITE_REACT_APP_CLOUDINARY_API_URL, {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setVideoState(data.secure_url);
-                uploadVideo(data.secure_url, dispatch);
-                localStorage.setItem('videoUrl', data.secure_url);
-            });
+        uploadVideo(formData, dispatch);
     };
 
     const handleChangeInput = (e: any) => {
+        if (e.target.name === 'length') {
+            e.target.value = (parseInt(e.target.value) + 30 - 1)
+        }
+        if (e.target.name === 'width') {
+            e.target.value = (parseInt(e.target.value) + 10 - 1)
+        }
+        if (e.target.name === 'height') {
+            e.target.value = (parseInt(e.target.value) + 10 - 1)
+        }
         setFormFields({ ...formFields, [e.target.name]: e.target.value });
+        updateVideoConfig(formFields, dispatch);
     }
 
     return (
@@ -62,7 +51,7 @@ const Configuration: React.FC = () => {
             <hr />
             <h1>Configuration</h1>
             <div className='select-file'>
-                <label htmlFor="file-input" className="card">
+                <label htmlFor="file-input" className="videoUploadCard">
                     <FiVideo style={{ fontSize: "40px" }} />
                     <input
                         type="file"
@@ -73,11 +62,6 @@ const Configuration: React.FC = () => {
                     <p className="title">Add Video</p>
                     <p className="subtitle">Click/drag</p>
                 </label>
-                {/* <div className="card">
-                    <FiMusic style={{ fontSize: "40px" }} />
-                    <p className="title">Add Audio</p>
-                    <p className="subtitle">Click/drag</p>
-                </div> */}
             </div>
             <div style={{ paddingTop: '30px' }}>
                 <div style={{ display: "flex" }}>
@@ -115,30 +99,9 @@ const Configuration: React.FC = () => {
                         />
                     </div>
                 </div>
-                <div className="input-group">
-                    <label htmlFor="title-text">Title Text</label>
-                    <input
-                        id="title-text"
-                        name='title_text'
-                        type="text"
-                        value={formFields.title_text}
-                        onChange={handleChangeInput}
-                        placeholder='Enter Title Text'
-                    />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="subtitle-text">Subtitle Text</label>
-                    <input
-                        id="subtitle-text"
-                        name='subtitle_text'
-                        type="text"
-                        value={formFields.subtitle_text}
-                        onChange={handleChangeInput}
-                        placeholder='Enter Subtitle Text'
-                    />
-                </div>
+                <label htmlFor="range" style={{ paddingBottom: '5px', fontWeight: 'bold' }}>Range to trim video</label>
+                <MultiRangeSlider min={0} max={100} />
             </div>
-
         </div>
     );
 };

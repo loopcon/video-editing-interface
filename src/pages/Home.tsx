@@ -1,35 +1,14 @@
-import OwlCarousel from 'react-owl-carousel';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
 const Home: React.FC = () => {
 
-    const options = {
-        center: true,
-        margin: 0,
-        dots: false,
-        autoplayTimeout: 8500,
-        smartSpeed: 450,
-        nav: false,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-            1000: {
-                items: 1
-            }
-        }
-    };
-
     return (
         <>
             <Header />
             <section className="hero">
-                <OwlCarousel className="hero__slider owl-carousel" {...options}>
+                <div className="hero__slider">
                     <div className="hero__item set-bg">
                         <div className="container">
                             <div className="row">
@@ -38,14 +17,14 @@ const Home: React.FC = () => {
                                         <span>For website and video editing</span>
                                         <h2>Videographer’s Portfolio</h2>
                                         <Link className="primary-btn" to={'create'}>
-                                            Get Start
+                                            Upload video here
                                         </Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </OwlCarousel>
+                </div>
             </section>
 
             <section className="services spad">
@@ -59,7 +38,7 @@ const Home: React.FC = () => {
                                 </div>
                                 <p>If you hire a videographer of our team you will get a video professional to make a custom
                                     video for your business and, once the project is over.</p>
-                                <a href="#" className="primary-btn">View all services</a>
+                                {/* <a href="#" className="primary-btn">View all services</a> */}
                             </div>
                         </div>
                         <div className="col-lg-8">

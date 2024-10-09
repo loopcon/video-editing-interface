@@ -477,8 +477,10 @@ ol {
 }
 
 .hero__item {
-  height: 684px;
-  padding-top: 255px;
+  height: 100vh;
+  /* padding-top: 255px; */
+  display: flex;
+  align-items: center;
 }
 
 .hero__text span {
@@ -490,7 +492,7 @@ ol {
   margin-bottom: 18px;
   position: relative;
   top: 100px;
-  opacity: 0;
+  opacity: 5;
   -webkit-transition: all, 0.3s;
   -o-transition: all, 0.3s;
   transition: all, 0.3s;
@@ -504,7 +506,7 @@ ol {
   margin-bottom: 38px;
   position: relative;
   top: 100px;
-  opacity: 0;
+  opacity: 5;
   -webkit-transition: all, 0.5s;
   -o-transition: all, 0.5s;
   transition: all, 0.5s;
@@ -512,7 +514,7 @@ ol {
 .hero__text .primary-btn {
   position: relative;
   top: 100px;
-  opacity: 0;
+  opacity: 5;
   -webkit-transition: all, 0.7s;
   -o-transition: all, 0.7s;
   transition: all, 0.7s;

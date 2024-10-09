@@ -11,7 +11,10 @@ export const VideoPlayer: React.FC<VideoProps> = ({ uploadedVideo }) => {
         <div className="main-content">
             <div className="video-container">
                 <AbsoluteFill>
-                    <OffthreadVideo className="video" src={uploadedVideo} />
+                    <OffthreadVideo
+                        src={uploadedVideo}
+                        className="video"
+                    />
                 </AbsoluteFill>
             </div>
         </div>
